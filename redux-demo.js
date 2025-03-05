@@ -34,6 +34,7 @@ const counterReducer = (state = { counter: 0 }, action) => {
 
 //Store
 const store = redux.createStore(counterReducer);
+console.log(store.getState());
 
 //Subscriber
 const counterSubscriber = () => {
@@ -46,3 +47,9 @@ const counterSubscriber = () => {
 //subscribe expects a function -> That's why we pass counterSubscriber
 //do not execute funciton, just call it
 store.subscribe(counterSubscriber);
+
+//Creating and dispatching a action
+//dispatch is method that trigggers an action
+store.dispatch({
+  type: "increment"
+});
