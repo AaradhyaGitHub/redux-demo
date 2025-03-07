@@ -27,14 +27,21 @@ const redux = require("redux");
 //we want to give state a default starting value. Why?
 //When the store is initialized, this reducer function is executed but at this point, we have no existing state.
 const counterReducer = (state = { counter: 0 }, action) => {
-  return {
-    counter: state.counter + 1
-  };
+  if (action.type === "increment") {
+    return {
+      counter: state.counter + 1
+    };
+  }
+  if (action.type === "decrement") {
+    return {
+      counter: state.counter - 1
+    };
+  }
+  return state;
 };
 
 //Store
 const store = redux.createStore(counterReducer);
-console.log(store.getState());
 
 //Subscriber
 const counterSubscriber = () => {
@@ -53,3 +60,6 @@ store.subscribe(counterSubscriber);
 store.dispatch({
   type: "increment"
 });
+store.dispatch({
+    type: "decrement"
+  });
